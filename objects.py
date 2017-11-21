@@ -1,5 +1,6 @@
 from pico2d import*
 
+#d
 class Player:
 
     PIXEL_PER_METER = (30.0 / 1.0)  # 10 pixel 30 cm
