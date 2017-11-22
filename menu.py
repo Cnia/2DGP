@@ -8,7 +8,6 @@ image_menu = None
 
 def enter():
     global image_menu
-    open_canvas()
     image_menu = load_image('png/main.png')
 
 def exit():

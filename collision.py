@@ -20,7 +20,7 @@ world_map = None
 def create_world():
     global pacman, ghost, item_set, world_map
     pacman = Player()
-    ghost = [Enemy(30, 670, 1),Enemy(670, 30, 2),Enemy(670, 670, 3),Enemy(360, 390, 4)]
+    ghost = [Enemy(35, 565, 1),Enemy(565, 35, 2),Enemy(565, 565, 3),Enemy(350, 390, 4)]
  #   item_set = [item(1), item(1), item(1), item(1)
   #              ,item(5), item(6), item(7), item(8)]
     world_map = map()
@@ -43,7 +43,6 @@ def enter():
 
 def exit():
     destroy_world()
-    close_canvas()
 
 
 def pause():
@@ -97,11 +96,15 @@ def update(frame_time):
 
 def draw(frame_time):
     clear_canvas()
-    world_map.draw()
+#    world_map.draw()
     pacman.draw()
 
     for g in ghost:
         g.draw()
 
+    for i in range(25):
+        for j in range(23):
+            if world_map.mapdata[i][22-j]==1:
+                draw_rectangle(j*26, 600-i*24,  (j+1)*26, 600-((i+1)*24))
 
     update_canvas()

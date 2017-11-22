@@ -1,6 +1,5 @@
 from pico2d import*
 
-#d
 class Player:
 
     PIXEL_PER_METER = (30.0 / 1.0)  # 10 pixel 30 cm
@@ -9,16 +8,16 @@ class Player:
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
-    TIME_PER_ACTION = 0.5
+    TIME_PER_ACTION = 0.1
     ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
-    FRAMES_PER_ACTION = 5
+    FRAMES_PER_ACTION = 4
 
     image = None
 
     RIGHT, LEFT, UP, DOWN = 3, 2, 1, 0
 
     def __init__(self):
-        self.x, self.y = 30, 30
+        self.x, self.y = 35, 35
         self.frame = 0
         self.life_time = 0.0
         self.total_frames = 0.0
