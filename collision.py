@@ -3,7 +3,7 @@ from pico2d import *
 import game_framework
 
 
-from objects import Player #, item # import Boy class from boy.py
+from objects import Player, item
 from Enemy import Enemy
 from map import map
 
@@ -12,17 +12,17 @@ name = "collision"
 
 pacman = None
 ghost = [None]*4
-item_set = [None] *8
+item_set = [None] * 8
 world_map = None
 
-#enemy__collision_check = None
+#enemy_collision_check = None
 
 def create_world():
     global pacman, ghost, item_set, world_map
     pacman = Player()
     ghost = [Enemy(35, 565, 1),Enemy(565, 35, 2),Enemy(565, 565, 3),Enemy(350, 390, 4)]
- #   item_set = [item(1), item(1), item(1), item(1)
-  #              ,item(5), item(6), item(7), item(8)]
+ #   item_set = [item(100, 100, 0), item(200, 200, 0), item(300, 300, 0), item(400, 400, 0)
+ #               ,item(100, 200, 4), item(200, 300, 5), item(300, 400, 6), item(400, 500, 7)]
     world_map = map()
 
 
@@ -92,19 +92,20 @@ def update(frame_time):
  #           ball.stop()
   #          big_balls_for_collision_check.remove(ball)
 
-    delay(0.5)
-
 def draw(frame_time):
     clear_canvas()
-#    world_map.draw()
+    world_map.draw()
     pacman.draw()
 
     for g in ghost:
         g.draw()
 
+#    for tem in item_set:
+#        tem.draw()
+
     for i in range(25):
         for j in range(23):
             if world_map.mapdata[i][22-j]==1:
-                draw_rectangle(j*26, 600-i*24,  (j+1)*26, 600-((i+1)*24))
+                draw_rectangle(600-j*26, 600-i*24,  600-((j+1)*26), 600-((i+1)*24))
 
     update_canvas()

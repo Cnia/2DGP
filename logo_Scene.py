@@ -10,7 +10,7 @@ logo_time = 0.0
 
 def enter():            #handle_event 을 실행
     global image
-    image = load_image('png/logo.png')
+    image = load_image('png/logo_clear.png')
     pass
 
 def exit():

@@ -8,7 +8,7 @@ class Player:
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
-    TIME_PER_ACTION = 0.1
+    TIME_PER_ACTION = 0.5
     ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
     FRAMES_PER_ACTION = 4
 
@@ -17,7 +17,7 @@ class Player:
     RIGHT, LEFT, UP, DOWN = 3, 2, 1, 0
 
     def __init__(self):
-        self.x, self.y = 35, 35
+        self.x, self.y = 40, 37
         self.frame = 0
         self.life_time = 0.0
         self.total_frames = 0.0
@@ -36,7 +36,7 @@ class Player:
         self.y += (self.dirY * distance)
 
     def draw(self):
-        self.image.clip_draw(self.frame * 30, self.state * 30, 30, 30, self.x, self.y)
+        self.image.clip_draw(self.frame * 22, self.state * 22, 22, 22, self.x, self.y)
 
     def handle_event(self, event):
         if (event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
@@ -59,11 +59,14 @@ class Player:
 
 
 
-#class item:
-#    image = None
+class item:
+    image = None
 
-#    def __init__(self, num):
-#        self.x, self.y = 0, 0
- #       self.type = num
-  #      if item.image == None:
-   #         Player.image = load_image('png/item.png')
+    def __init__(self, x, y, num):
+        self.x, self.y = x, y
+        self.type = num
+        if item.image == None:
+            item.image = load_image('png/item.png')
+
+    def draw(self):
+        self.image.clip_draw(int(self.type / 4)*40, (self.type %4)* 40, 40, 40, self.x, self.y)
