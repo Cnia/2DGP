@@ -3,7 +3,7 @@ from pico2d import*
 class Player:
 
     PIXEL_PER_METER = (30.0 / 1.0)  # 10 pixel 30 cm
-    RUN_SPEED_KMPH = 3.5  # Km / Hour
+    RUN_SPEED_KMPH = 5  # Km / Hour
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -21,9 +21,13 @@ class Player:
         self.frame = 0
         self.life_time = 0.0
         self.total_frames = 0.0
+        self.state = self.RIGHT
+
         self.dirX = 0
         self.dirY = 0
-        self.state = self.RIGHT
+        self.switch = 0
+        self.collision = 0
+        self.life = 3
         if Player.image == None:
             Player.image = load_image('png/pacman.png')
 
@@ -36,7 +40,7 @@ class Player:
         self.y += (self.dirY * distance)
 
     def draw(self):
-        self.image.clip_draw(self.frame * 22, self.state * 22, 22, 22, self.x, self.y)
+        self.image.clip_draw(self.frame * 20, self.state * 20, 20, 20, self.x, self.y)
 
     def handle_event(self, event):
         if (event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
@@ -57,6 +61,14 @@ class Player:
                 self.dirY = -1
 
 
+    def get_bb(self):
+        return self.x - 10, self.y - 10, self.x + 10, self.y + 10
+
+    def draw_bb(self):
+        draw_rectangle(*self.get_bb())
+
+
+
 
 
 class item:
@@ -70,3 +82,10 @@ class item:
 
     def draw(self):
         self.image.clip_draw(int(self.type / 4)*40, (self.type %4)* 40, 40, 40, self.x, self.y)
+
+
+    def get_bb(self):
+        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
+
+    def draw_bb(self):
+        draw_rectangle(*self.get_bb())

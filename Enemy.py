@@ -36,4 +36,11 @@ class Enemy:
        # self.x += (self.dir * distance)
 
     def draw(self):
-        self.image.clip_draw(self.state* 30, self.type*30, 30, 30, self.x, self.y)
+        self.image.clip_draw(self.state* 28, self.type*28, 28, 28, self.x, self.y)
+
+
+    def get_bb(self):
+        return self.x - 10, self.y - 10, self.x + 10, self.y + 10
+
+    def draw_bb(self):
+        draw_rectangle(*self.get_bb())

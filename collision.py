@@ -14,16 +14,18 @@ pacman = None
 ghost = [None]*4
 item_set = [None] * 8
 world_map = None
+font = None
 
 #enemy_collision_check = None
 
 def create_world():
-    global pacman, ghost, item_set, world_map
+    global pacman, ghost, item_set, world_map, font
     pacman = Player()
     ghost = [Enemy(35, 565, 1),Enemy(565, 35, 2),Enemy(565, 565, 3),Enemy(350, 390, 4)]
  #   item_set = [item(100, 100, 0), item(200, 200, 0), item(300, 300, 0), item(400, 400, 0)
  #               ,item(100, 200, 4), item(200, 300, 5), item(300, 400, 6), item(400, 500, 7)]
     world_map = map()
+    font = load_font('png/Pixel.ttf', 30)
 
 
 def destroy_world():
@@ -76,13 +78,22 @@ def collide(a, b):
     if bottom_a > top_b: return False
     return True
 
+#def collide_wall()
+
+
 
 def update(frame_time):
     pacman.update(frame_time)
     for g in ghost:
         g.update(frame_time)
+        if collide(pacman, g):
+            pacman.life -= 1
+            pacman.x = 40
+            pacman.y = 37
+            pacman.dirX = 0
+            pacman.dirY = 0
 
-    # fill here
+            # fill here
 #    for ball in balls:
 #        if collide(boy, ball):
  #           balls.remove(ball)
@@ -96,9 +107,13 @@ def draw(frame_time):
     clear_canvas()
     world_map.draw()
     pacman.draw()
+    pacman.draw_bb()
 
     for g in ghost:
         g.draw()
+        g.draw_bb()
+
+    font.draw(630, 450, 'LIFE: %d' % pacman.life, (255, 0, 0))
 
 #    for tem in item_set:
 #        tem.draw()
