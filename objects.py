@@ -60,6 +60,10 @@ class Player:
                 self.dirX = 0
                 self.dirY = -1
 
+    def death(self):
+        self.death_count = 0
+        self.image = load_image('png/pacman death.png');
+        
 
     def get_bb(self):
         return self.x - 10, self.y - 10, self.x + 10, self.y + 10
