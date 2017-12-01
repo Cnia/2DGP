@@ -6,7 +6,7 @@ class map:
     image = None
     mapdata = None
     def __init__(self):
-        self.image = load_image('png/map1.png')
+        self.image = load_image('resource/png/map1.png')
         self.mapdata = [
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
             , [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]

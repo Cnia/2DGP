@@ -28,8 +28,9 @@ class Player:
         self.switch = 0
         self.collision = 0
         self.life = 3
+        self.death_count = 0
         if Player.image == None:
-            Player.image = load_image('png/pacman.png')
+            Player.image = load_image('resource/png/pacman.png')
 
     def update(self, frame_time):
         self.life_time += frame_time
@@ -40,7 +41,10 @@ class Player:
         self.y += (self.dirY * distance)
 
     def draw(self):
-        self.image.clip_draw(self.frame * 20, self.state * 20, 20, 20, self.x, self.y)
+        if self.death_count == 0:
+            self.image.clip_draw(self.frame * 20, self.state * 20, 20, 20, self.x, self.y)
+        else:
+            self.image.clip_draw(self.death_count * 20, self.state * 20, 20, 20, self.x, self.y)
 
     def handle_event(self, event):
         if (event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
@@ -61,9 +65,19 @@ class Player:
                 self.dirY = -1
 
     def death(self):
+        for i in range(11):
+            self.death_count += 1
+            self.draw()
+            delay(0.2)
+        self.life -= 1
+        self.x = 40
+        self.y = 37
+        self.dirX = 0
+        self.dirY = 0
         self.death_count = 0
-        self.image = load_image('png/pacman death.png');
-        
+        self.image = load_image('resource/png/pacman.png')
+
+
 
     def get_bb(self):
         return self.x - 10, self.y - 10, self.x + 10, self.y + 10
@@ -82,7 +96,7 @@ class item:
         self.x, self.y = x, y
         self.type = num
         if item.image == None:
-            item.image = load_image('png/item.png')
+            item.image = load_image('resource/png/item.png')
 
     def draw(self):
         self.image.clip_draw(int(self.type / 4)*40, (self.type %4)* 40, 40, 40, self.x, self.y)

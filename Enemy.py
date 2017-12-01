@@ -26,7 +26,7 @@ class Enemy:
         self.dir = 0
         self.state = random.randint(0, 3) * 2
         if Enemy.image == None:
-            Enemy.image = load_image('png/ghost.png')
+            Enemy.image = load_image('resource/png/ghost.png')
 
     def update(self, frame_time):
         self.life_time += frame_time

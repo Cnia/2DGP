@@ -11,6 +11,6 @@ import collision
 
 open_canvas()
 
-game_framework.run(start_state)
+game_framework.run(collision)
 
 close_canvas()
