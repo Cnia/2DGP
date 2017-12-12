@@ -41,10 +41,7 @@ class Player:
         self.y += (self.dirY * distance)
 
     def draw(self):
-        if self.death_count == 0:
             self.image.clip_draw(self.frame * 20, self.state * 20, 20, 20, self.x, self.y)
-        else:
-            self.image.clip_draw(self.death_count * 20, self.state * 20, 20, 20, self.x, self.y)
 
     def handle_event(self, event):
         if (event.type, event.key) == (SDL_KEYDOWN, SDLK_LEFT):
@@ -65,10 +62,11 @@ class Player:
                 self.dirY = -1
 
     def death(self):
+        self.image = load_image('resource/png/pacman_death.png')
         for i in range(11):
-            self.death_count += 1
+            self.death_count = int(self.total_frames) % 11
             self.draw()
-            delay(0.2)
+            self.image.clip_draw(self.death_count * 20, self.state * 20, 20, 20, self.x, self.y)
         self.life -= 1
         self.x = 40
         self.y = 37
@@ -107,3 +105,5 @@ class item:
 
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
+
+
